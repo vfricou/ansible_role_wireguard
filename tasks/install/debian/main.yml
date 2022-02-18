@@ -1,0 +1,17 @@
+---
+- name: "install | debian | perform wireguard installation"
+  ansible.builtin.apt:
+    name: "{{deb_wg_pkg}}"
+    state: present
+    dpkg_options: force-confold
+    install_recommends: no
+  notify: "reboot host"
+
+- ansible.builtin.meta: flush_handlers
+
+- name: "install | debian | wait for host alive"
+  ansible.builtin.wait_for_connection:
+    connect_timeout: 40
+    sleep: 5
+    delay: 1
+    timeout: 300

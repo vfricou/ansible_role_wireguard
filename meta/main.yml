@@ -1,0 +1,21 @@
+galaxy_info:
+  role_name: "linux_management"
+  author: "Vincent FRICOU"
+  namespace: "vfricou"
+  description: "Install and configure wireguard on GNU/Linux OS"
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+    - name: Debian
+      versions:
+        - buster
+        - bullseye
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+        - impish
+    - name: Rocky
+      versions:
+        - 8
+dependencies: []

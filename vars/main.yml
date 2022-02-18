@@ -1,0 +1,11 @@
+---
+deb_required_pkg:
+  - net-tools
+  - linux-headers-amd64
+deb_wg_pkg:
+  - wireguard
+  - wireguard-tools
+
+rocky_wg_pkg:
+  - kmod-wireguard
+  - wireguard-tools

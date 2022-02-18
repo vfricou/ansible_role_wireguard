@@ -1,0 +1,5 @@
+---
+- name: "reboot host"
+  ansible.builtin.shell: reboot
+  async: 1
+  poll: 0

@@ -1,0 +1,26 @@
+---
+- name: "prerequisite | debian | update package manager cache"
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: "prerequisite | debian | install required packages for wireguard"
+  ansible.builtin.apt:
+    name: "{{deb_required_pkg}}"
+    state: present
+    dpkg_options: force-confold
+    install_recommends: no
+
+- name: "prerequisite | debian | specific tasks for buster"
+  block:
+    - name: "prerequisite | debian | ensure backports repository is present"
+      ansible.builtin.copy:
+        dest: '/etc/apt/sources.list.d/backports.list'
+        content: "deb {{deb_repo_url }} {{ansible_distribution_release}}-backports main contrib"
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
+
+    - name: "prerequisite | debian | update package manager cache"
+      ansible.builtin.apt:
+        update_cache: yes
+  when: ansible_distribution == 'Debian' and ansible_distribution_major_version|int == 10

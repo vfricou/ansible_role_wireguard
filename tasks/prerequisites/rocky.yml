@@ -1,0 +1,8 @@
+---
+- name: "prerequisites | rocky | enable EPEL repository"
+  ansible.builtin.dnf:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - epel-release
+    - elrepo-release

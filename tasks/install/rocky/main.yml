@@ -1,0 +1,15 @@
+---
+- name: "install | rocky | install wireguard packages"
+  ansible.builtin.dnf:
+    name: "{{rocky_wg_pkg}}"
+    state: present
+  notify: "reboot host"
+
+- ansible.builtin.meta: flush_handlers
+
+- name: "install | debian | wait for host alive"
+  ansible.builtin.wait_for_connection:
+    connect_timeout: 40
+    sleep: 5
+    delay: 1
+    timeout: 300

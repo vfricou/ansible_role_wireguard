@@ -1,0 +1,23 @@
+---
+- name: "import validator tasks"
+  ansible.builtin.import_tasks: validator/check_os.yml
+
+- name: "import debian tasks"
+  block:
+    - name: "import debian prerequisites"
+      ansible.builtin.import_tasks: prerequisites/debian.yml
+
+    - name: "import debian install tasks"
+      ansible.builtin.import_tasks: install/debian/main.yml
+
+  when: ansible_distribution == 'Debian'
+
+- name: "import rocky tasks"
+  block:
+    - name: "import rocky prerequisites"
+      ansible.builtin.import_tasks: prerequisites/rocky.yml
+
+    - name: "import rocky install tasks"
+      ansible.builtin.import_tasks: install/rocky/main.yml
+
+  when: ansible_distribution == 'Rocky'
